@@ -1,4 +1,6 @@
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
+import { fetchSuccess, updateLike, updateDislike } from "../redux/movieSlice"
 
 const Container = styled.div`
     display: flex;
@@ -37,18 +39,28 @@ const LikeContainer = styled.div`
 `
 const Left = styled.div`
     color: green;
+    cursor: pointer;
 `
 const Right = styled.div`
     color: red;
+    cursor: pointer;
 `
 const Card = ({movie}) => {
+    const dispatch = useDispatch()
+    const movies = useSelector(state => state.movies)
+
+    const handleLikeClick = (str) => {
+        str === "like" ? dispatch(updateLike(movie.id))
+        :dispatch(updateDislike(movie.id))        
+    }
+
   return (
     <Container>
         <Title>{movie.title}</Title>
         <Category>categorie: {movie.category}</Category>
         <LikeContainer>
-            <Left>J'aime {movie.likes}</Left>
-            <Right>{movie.dislikes} Je n'aime pas</Right>
+            <Left onClick={() => handleLikeClick("like")}>J'aime {movie.likes}</Left>
+            <Right onClick={() => handleLikeClick("dislike")}>{movie.dislikes} Je n'aime pas</Right>
         </LikeContainer>
         <DeleteButton>Supprimer</DeleteButton>
     </Container>

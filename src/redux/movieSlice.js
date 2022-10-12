@@ -18,14 +18,32 @@ export const movieSlice = createSlice({
         fetchError: (state) => {
             state.pending = false;
             state.error = true;
-        }
+        },
+        updateLike: (state, action) => {
+            const index = state.movies.findIndex(movie => 
+                movie.id == action.payload
+            );
+            const newArray = [...state.movies]; //making a new array
+            newArray[index].likes += 1 //changing value in the new array
+            state.movies = newArray 
+        },
+        updateDislike: (state, action) => {
+            const index = state.movies.findIndex(movie => 
+                action.payload
+            ); // finding the index of the updating array
+            const newArray = [...state.movies]; //making a new array
+            newArray[index].dislikes += 1 //changing value in the new array
+            state.movies = newArray 
+        },
     }
 })
 
 export const { 
     fetchStart, 
     fetchSuccess, 
-    fetchError 
+    fetchError, 
+    updateLike,
+    updateDislike,
 } = movieSlice.actions
 
 export default movieSlice.reducer

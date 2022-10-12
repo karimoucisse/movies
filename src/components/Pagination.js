@@ -13,10 +13,13 @@ const Container = styled.div`
 const Pagination = () => {
     const dispatch = useDispatch()
     const movies = useSelector(state => state.movies.movies)
-    console.log(movies);
+    // const index = movies.findIndex(todo => todo.id == 2)
+    
+
     useEffect(() => {
         getMovies(dispatch)
     }, [])
+
   return (
     <Container>
         {movies?.map(movie => {
