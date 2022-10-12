@@ -1,6 +1,7 @@
 import styled from "styled-components"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
+import { updateFilter } from "../redux/filterSlice"
 
 const Container = styled.div`
     width: 100%;
@@ -24,8 +25,8 @@ const Option = styled.option`
     font-size: 18px;
 `
 const Filter = () => {
+    const dispatch = useDispatch() 
     const [uniqueFilterArray, setUniqueFilterArray] = useState()
-    const [filterValue, setFilterValue] = useState()
     const movies = useSelector(state => state.movies.movies)
     
     useEffect(() => {
@@ -39,8 +40,7 @@ const Filter = () => {
 
     const handleFiltersChange = (e) => {
         const value = e.target.value
-        setFilterValue(value)
-        // console.log(filterValue);
+        dispatch(updateFilter(value))
     }
 
     

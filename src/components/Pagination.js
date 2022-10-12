@@ -13,6 +13,7 @@ const Container = styled.div`
 const Pagination = () => {
     const dispatch = useDispatch()
     const movies = useSelector(state => state.movies.movies)
+    const filter = useSelector(state => state.filter.filter)
 
     useEffect(() => {
         getMovies(dispatch)
