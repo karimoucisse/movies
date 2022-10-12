@@ -85,7 +85,6 @@ const Card = ({movie}) => {
         rate = Math.round(rate)
         rate = rate /10
         setRating(rate)
-        console.log(rating);
     }, [movie.likes, movie.dislikes])
 
     useEffect(() => {   //Setting the rate color

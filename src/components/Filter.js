@@ -24,20 +24,23 @@ const Option = styled.option`
     font-size: 18px;
 `
 const Filter = () => {
-    const [filter, setFilter] = useState([])
+    const [uniqueFilterArray, setUniqueFilterArray] = useState()
+    const [filterValue, setFilterValue] = useState()
     const movies = useSelector(state => state.movies.movies)
     
     useEffect(() => {
         const categories = []
-        movies.map(movie => {
-            categories.push(movie.category)
-            //push all category in the array categories
-        })
+        for(let i= 0; i< movies.length; i++) {
+            categories.push(movies[i].category)
+        }
         const uniq = [...new Set(categories)]; // remove duplicates
-        setFilter(uniq)
+        setUniqueFilterArray(uniq)
     }, [movies])
-    const handleFiltersChange = () => {
 
+    const handleFiltersChange = (e) => {
+        const value = e.target.value
+        setFilterValue(value)
+        // console.log(filterValue);
     }
 
     
@@ -47,8 +50,8 @@ const Filter = () => {
             <FilterTitle>Par categories: </FilterTitle>
             <Select onChange={handleFiltersChange}>
                 <Option>Tout</Option>
-                {filter.map(category => {
-                    return <Option>{category}</Option>
+                {uniqueFilterArray?.map((category, index) => {
+                    return <Option key= {index} >{category}</Option>
                 })}
             </Select> 
         </div>
