@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 export const movieSlice = createSlice({
+    name: 'movies',
     initialState: {
         movies: null,
         pending: false,
@@ -14,7 +15,7 @@ export const movieSlice = createSlice({
             state.pending = false;
             state.movies = action.payload;
         },
-        fetchError: (state) {
+        fetchError: (state) => {
             state.pending = false;
             state.error = true;
         }
