@@ -22,19 +22,27 @@ export const movieSlice = createSlice({
         updateLike: (state, action) => {
             const index = state.movies.findIndex(movie => 
                 movie.id == action.payload
-            );
+            ); // finding the index of the array we want to update
             const newArray = [...state.movies]; //making a new array
             newArray[index].likes += 1 //changing value in the new array
             state.movies = newArray 
         },
         updateDislike: (state, action) => {
             const index = state.movies.findIndex(movie => 
-                action.payload
-            ); // finding the index of the updating array
+                movie.id == action.payload
+            ); // finding the index of the array we want to update
             const newArray = [...state.movies]; //making a new array
             newArray[index].dislikes += 1 //changing value in the new array
             state.movies = newArray 
         },
+        deleteMovie: (state, action) => {
+            const index = state.movies.findIndex(movie => 
+                movie.id == action.payload
+            ); // finding the index of the array we want to update
+            const newArray = [...state.movies];
+            newArray.splice(index, 1) // delete one movie
+            state.movies = newArray 
+        }
     }
 })
 
@@ -44,6 +52,7 @@ export const {
     fetchError, 
     updateLike,
     updateDislike,
+    deleteMovie
 } = movieSlice.actions
 
 export default movieSlice.reducer

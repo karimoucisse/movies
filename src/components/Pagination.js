@@ -8,13 +8,11 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 20px 10rem;
+    padding: 20px 7rem;
 `
 const Pagination = () => {
     const dispatch = useDispatch()
     const movies = useSelector(state => state.movies.movies)
-    // const index = movies.findIndex(todo => todo.id == 2)
-    
 
     useEffect(() => {
         getMovies(dispatch)
