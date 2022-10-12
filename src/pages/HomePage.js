@@ -1,4 +1,5 @@
 import style from "styled-components"
+import Filter from "../components/Filter";
 import Pagination from "../components/Pagination";
 
 const Title = style.h1`
@@ -9,10 +10,11 @@ const Title = style.h1`
 function App() {
   
   return (
-    <div>
+    <>
       <Title>Movies</Title>
+      <Filter/>
       <Pagination/>
-    </div>
+    </>
   );
 }
 
