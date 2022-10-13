@@ -2,12 +2,15 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { updateLike, updateDislike, deleteMovie } from "../redux/movieSlice"
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const Container = styled.div`
     position: relative;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     width: 220px;
-    height: 300px;
+    height: 320px;
     border: 1px solid darkblue;
     margin: 10px 0;
     padding: 10px;
@@ -29,29 +32,19 @@ const Category = styled.p`
     color: grey;
     text-align: center;
 `
-const DeleteButton = styled.button`
-    width: 100px;
-    cursor: pointer;
-    margin: 0 auto;
-    padding: 5px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    text-align: center;
-`
 const LikeContainer = styled.div`
-    margin-top: 5px;
+    margin-top: 8px;
     display: flex;
     justify-content: space-between;
 `
-const Left = styled.div`
-    color: green;
+const ThumbContainer = styled.div`
+    color: ${props => props.color};
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 `
-const Right = styled.div`
-    color: red;
-    cursor: pointer;
-`
+
 const RatingContainer = styled.div`
     position: absolute;
     top: -10px;
@@ -67,12 +60,19 @@ const RatingContainer = styled.div`
     width: 40px;
     border-radius: 50%;
 `
+const DeleteIcon = styled(HighlightOffIcon)`
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    font-size: 25px !important;
+`
 const Card = ({movie}) => {
     const dispatch = useDispatch()
     const [rating, setRating] = useState()
     const [ratingColor, setRatingColor] = useState()
 
-    const handleLikeClick = (str) => {
+    const handleLikeClick = (str) => { 
         if(str === "like") {
             dispatch(updateLike(movie.id))
         } else {
@@ -99,14 +99,25 @@ const Card = ({movie}) => {
     }, [rating])
 
   return (
-    <Container onClick={() => dispatch(deleteMovie(movie.id))}>
+    <Container>
         <RatingContainer color= {ratingColor}> {rating} </RatingContainer>
+        <DeleteIcon onClick={() => dispatch(deleteMovie(movie.id))}/>
         <Title>{movie.title}</Title>
         <Category>categorie: {movie.category}</Category>
         <Image  src= {movie.src} alt= {`image du film ${movie.title}`}/>
         <LikeContainer>
-            <Left onClick={() => handleLikeClick("like")}>J'aime {movie.likes}</Left>
-            <Right onClick={() => handleLikeClick("dislike")}>{movie.dislikes} Je n'aime pas</Right>
+            <ThumbContainer 
+                onClick={() => handleLikeClick("like")}
+                color= "green"
+            >
+                <ThumbUpIcon/> {movie.likes}
+            </ThumbContainer>
+            <ThumbContainer 
+                onClick={() => handleLikeClick("dislike")}
+                color= "red"
+            >
+                {movie.dislikes} <ThumbDownIcon/>
+            </ThumbContainer>
         </LikeContainer>
         {/* <DeleteButton>Supprimer</DeleteButton> */}
     </Container>
