@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 export const filterSlice = createSlice({
     name: "filter",
     initialState: {
-        filter: 'Touts les films'
+        filter: 'Tous les films'
     },
     reducers: {
         updateFilter: (state, action) => {

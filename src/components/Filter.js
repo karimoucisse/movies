@@ -49,7 +49,7 @@ const Filter = () => {
         <div>
             <FilterTitle>Par categories: </FilterTitle>
             <Select onChange={handleFiltersChange}>
-                <Option>Touts les films</Option>
+                <Option>Tous les films</Option>
                 {uniqueFilterArray?.map((category, index) => {
                     return <Option key= {index} >{category}</Option>
                 })}

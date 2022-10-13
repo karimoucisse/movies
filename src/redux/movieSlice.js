@@ -4,7 +4,6 @@ export const movieSlice = createSlice({
     name: 'movies',
     initialState: {
         movies: [],
-        filteredMovies: [],
         pending: false,
         error: false
     },
@@ -43,19 +42,6 @@ export const movieSlice = createSlice({
             const newArray = [...state.movies];
             newArray.splice(index, 1) // delete one movie
             state.movies = newArray 
-        },
-        filterMovies: (state, action) => {
-            const newArray = [...state.movies]
-            if(action.payload.filter === "Touts les films") {
-                newArray.slice(action.payload.firstIndex, action.payload.lastIndex)
-                state.filteredMovies = newArray
-            } else {
-                const filteredArray = newArray.filter((movie) => {
-                    return movie.category.includes(action.payload.filter)
-                })
-                filteredArray.slice(action.payload.firstIndex, action.payload.lastIndex)
-                state.filteredMovies = filteredArray
-            }
         }
     }
 })
@@ -66,8 +52,7 @@ export const {
     fetchError, 
     updateLike,
     updateDislike,
-    deleteMovie,
-    filterMovies
+    deleteMovie
 } = movieSlice.actions
 
 export default movieSlice.reducer

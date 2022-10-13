@@ -4,7 +4,6 @@ import Card from './Card'
 import { useDispatch, useSelector } from "react-redux"
 import { getMovies } from "../redux/apiCalls";
 import DirectionButtons from "./DirectionButtons";
-import { filterMovies } from "../redux/movieSlice";
 
 const Container = styled.div`
     padding: 20px 7rem;
@@ -36,9 +35,9 @@ const Pagination = () => {
     const dispatch = useDispatch()
     const movies = useSelector(state => state.movies.movies)
     const filter = useSelector(state => state.filter.filter)
+    const [filteredMovies, setFilteredMovies] = useState()
     const page = useSelector(state => state.pageNumber.page)
     const moviePerPage = useSelector(state => state.pageNumber.moviePerPage)
-    const filteredMovies = useSelector(state => state.movies.filteredMovies)
 
     
     useEffect(() => {
@@ -48,11 +47,24 @@ const Pagination = () => {
     useEffect(() => {
         const lastMovieIndex = page * moviePerPage
         const firstMovieIndex = lastMovieIndex - moviePerPage
-        dispatch(filterMovies({
-            filter,
-            firstIndex: firstMovieIndex,
-            lastIndex: lastMovieIndex
-        }))
+        console.log(page, moviePerPage);
+        // if the filter is == "Touts les films", then print all movies,
+        // else print movies that correspond to the filter
+        if(movies) {
+            if(filter === "Tous les films") {
+                const newMovies = movies
+                setFilteredMovies(
+                    newMovies.slice(firstMovieIndex, lastMovieIndex)
+                ) 
+            } else {
+                const newMovies = movies.filter((movie) => {
+                    return movie.category.includes(filter)
+                })
+                setFilteredMovies(
+                    newMovies.slice(firstMovieIndex, lastMovieIndex)
+                ) 
+            }
+        }
     }, [movies, filter, page, moviePerPage])
 
   return (
