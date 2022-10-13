@@ -6,9 +6,10 @@ import { getMovies } from "../redux/apiCalls";
 
 const Container = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     padding: 20px 7rem;
+    gap:40px;
 `
 const Pagination = () => {
     const dispatch = useDispatch()

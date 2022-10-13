@@ -51,8 +51,8 @@ const movies = [
       id: '7',
       title: 'Intouchables',
       category: 'Drame',
-      likes: 14,
-      dislikes: 32,
+      likes: 304,
+      dislikes: 1,
       src: 'https://fr.web.img6.acsta.net/medias/nmedia/18/82/69/17/19806656.jpg'
       // source: allocine
     }, {

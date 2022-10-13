@@ -1,8 +1,9 @@
-import style from "styled-components"
+import styled from "styled-components"
 import Filter from "../components/Filter";
 import Pagination from "../components/Pagination";
 
-const Title = style.h1`
+const Title = styled.h1`
+  margin-top: 20px;
   color: darkblue; 
   text-align: center;
 `
@@ -11,7 +12,7 @@ function App() {
   
   return (
     <>
-      <Title>Movies</Title>
+      <Title>Film à voir</Title>
       <Filter/>
       <Pagination/>
     </>
