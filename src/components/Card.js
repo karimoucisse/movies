@@ -9,11 +9,11 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 const Container = styled.div`
     position: relative;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    width: 220px;
+    width: 240px;
     height: 320px;
     border: 1px solid darkblue;
     margin: 10px 0;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 10px;
     cursor: pointer;
 `
